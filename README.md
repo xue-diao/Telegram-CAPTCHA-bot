@@ -12,7 +12,8 @@
 2. 在服务器上安装 Python-Telegram-Bot ： `pip3 install --upgrade python-telegram-bot` 。
 3. Clone 并打开本项目：`git clone https://github.com/hh2333/Telegram-CAPTCHA-bot.git && cd Telegram-CAPTCHA-bot` 。
 4. 将项目下 config.json 里的 token 字符串修改为第一步所获取到的 Bot API Token ，除此之外你也可以修改里面的配置选项。
-5. 使用 `python3 main.py` 运行此 bot 。
+5. 按照注释修改 Telegram-CAPTCHA-bot.service ，修改好后删除注释并将其移动到 /etc/systemd/system 下。
+6. 输入 systemctl start Telegram-CAPTCHA-bot 即可运行 bot 。
 
 ## 开源协议
 
