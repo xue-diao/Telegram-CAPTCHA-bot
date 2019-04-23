@@ -158,8 +158,8 @@ def handle_challenge_response(bot, update):
             # lift the restriction
             try:
                 bot.restrict_chat_member(chat, target,
-                    can_send_messages=True, can_send_media_messages=True,
-                    can_send_other_messages=True, can_add_web_page_previews=True)
+                    can_send_messages=True, can_send_media_messages=False,
+                    can_send_other_messages=False, can_add_web_page_previews=False)
             except TelegramError:
                 bot.answer_callback_query(callback_query_id=query['id'],
                     text=group_config['msg_bot_no_permission'])
@@ -200,8 +200,8 @@ def handle_challenge_response(bot, update):
     # lift the restriction
     try:
         bot.restrict_chat_member(chat, target,
-            can_send_messages=True, can_send_media_messages=True,
-            can_send_other_messages=True, can_add_web_page_previews=True)
+            can_send_messages=True, can_send_media_messages=False,
+            can_send_other_messages=False, can_add_web_page_previews=False)
     except TelegramError:
         # This my happen when the bot is deop-ed after the user join
         # and before the user click the button
