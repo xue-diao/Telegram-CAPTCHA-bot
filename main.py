@@ -212,14 +212,29 @@ def handle_challenge_response(bot, update):
 
     # verify the ans
     correct = (str(challenge.ans()) == query['data'])
-    msg = 'msg_challenge_passed' if correct else bot.kick_chat_member(chat, target)
-    bot.edit_message_text(group_config[msg],
-        chat_id=chat, message_id=bot_msg, reply_mark=None)
+    if correct
+    try:
+                bot.restrict_chat_member(chat, target,
+                    can_send_messages=True, can_send_media_messages=False,
+                    can_send_other_messages=False, can_add_web_page_previews=False)
+            except TelegramError:
+                bot.answer_callback_query(callback_query_id=query['id'],
+                    text=group_config['msg_bot_no_permission'])
+                return None
+            bot.edit_message_text(group_config['msg_approved'].format(user=username),
+                chat_id=chat, message_id=bot_msg, reply_mark=None)
+            
+    else
+    try:
+                bot.kick_chat_member(chat, target)
+            except TelegramError:
+                bot.answer_callback_query(callback_query_id=query['id'],
+                    text=group_config['msg_bot_no_permission'])
+                return None
+            bot.edit_message_text(group_config['msg_refused'].format(user=username),
+                chat_id=chat, message_id=bot_msg, reply_mark=None)
 
-    if group_config['delete_passed_challenge']:
-        challenge_sched.enter(group_config['delete_passed_challenge_interval'],
-            5, bot.delete_message, argument=(chat, bot_msg))
-
+        bot.answer_callback_query(callback_query_id=query['id'])
 
 def main():
     global updater, dispatcher
