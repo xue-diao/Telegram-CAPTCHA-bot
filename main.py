@@ -212,7 +212,7 @@ def handle_challenge_response(bot, update):
 
     # verify the ans
     correct = (str(challenge.ans()) == query['data'])
-    msg = 'msg_challenge_passed' if correct else 'msg_challenge_mercy_passed'
+    msg = 'msg_challenge_passed' if correct else bot.kick_chat_member(chat, target)
     bot.edit_message_text(group_config[msg],
         chat_id=chat, message_id=bot_msg, reply_mark=None)
 
